@@ -40,7 +40,7 @@ const Easy = () => {
   ];
 
   let target = [];
-  let lastId 
+  let lastId;
 
   const random = () => {
     cards = [...cards, ...cards];
@@ -51,25 +51,28 @@ const Easy = () => {
 
   const fliping = (e, id) => {
     if (target[1] === undefined) {
-      console.log(true);
       if (target[0] === undefined) {
         target.push(e.currentTarget);
         target[0].style.transform = "rotateY(180deg)";
-        lastId = id ;
-  
+        lastId = id;
       } else {
         target.push(e.currentTarget);
         target[1].style.transform = "rotateY(180deg)";
-        
-        if( lastId === id) {
-          alert("win")
-        }
 
-        setTimeout(function () {
-          target[0].style.transform = "rotateY(0deg)";
-          target[1].style.transform = "rotateY(0deg)";
-          target = []
+        setTimeout(() => {
+          if (lastId === id) {
+            
+            target[0].style.visibility = 'hidden';
+            target[1].style.visibility = 'hidden';
+            target = [];
+          } else {
+            target[0].style.transform = "rotateY(0deg)";
+            target[1].style.transform = "rotateY(0deg)";
+            target = [];
+          }
         }, 2000);
+
+       
       }
     } else {
     }
@@ -87,7 +90,11 @@ const Easy = () => {
   return (
     <div className="playArea">
       {cards.map((card, i) => (
-        <div className="card" key={i} onClick={(event) => fliping(event, card.id)}>
+        <div
+          className="card"
+          key={i}
+          onClick={(event) => fliping(event, card.id)}
+        >
           <div className="  back">
             {" "}
             <img src={backImg} />{" "}
