@@ -34,25 +34,31 @@ const Easy = () => {
       id: 5,
       image: <img src={img10} />,
     },
-    {
-      id: 6,
-      image: <img src={img8} />,
-    },
-    { id: 7, image: <img src={img8} /> },
-    {
-      id: 8,
-      image: <img src={img7} />,
-    },
-    {
-      id: 9,
-      image: <img src={img7} />,
-    },
-    {
-      id: 10,
-      image: <img src={img6} />,
-    },
-    { id: 11, image: <img src={img6} /> },
+    // {
+    //   id: 6,
+    //   image: <img src={img8} />,
+    // },
+    // { id: 7, image: <img src={img8} /> },
+    // {
+    //   id: 8,
+    //   image: <img src={img7} />,
+    // },
+    // {
+    //   id: 9,
+    //   image: <img src={img7} />,
+    // },
+    // {
+    //   id: 10,
+    //   image: <img src={img6} />,
+    // },
+    // { id: 11, image: <img src={img6} /> },
   ];
+
+  const random = () => {
+    cards = [ ...cards, ...cards]
+    cards = cards.sort(() => Math.random() - 0.5)
+  }
+  random();
 
   const fliping = (e) => {
     const target = e.currentTarget;
