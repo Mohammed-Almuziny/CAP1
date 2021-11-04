@@ -1,0 +1,25 @@
+.homeMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  display: inline-block;
+  background-color: white;
+  margin: 10rem 5rem;
+  padding-top: 10px;
+  width: 10rem;
+  height: 3rem;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  border: 2px solid black;
+  border-radius: 1rem;
+}
+
+.link:hover {
+  background-color: gray;
+  color: blue;
+}

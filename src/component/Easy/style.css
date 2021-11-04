@@ -9,22 +9,37 @@
   width: 6rem;
   height: 6rem;
   background-color: white;
- 
+
   transition: transform 2s;
   transform-style: preserve-3d;
   cursor: pointer;
-}
-
-.back, .front {
-  position: absolute;
-  backface-visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.back{
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
   transform: rotateY(180deg);
 }
 
-
+card {
+  width: 6.5rem;
+  height: 6.5rem;
+  background-color: rgb(148, 20, 20);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
