@@ -1,16 +1,18 @@
 import Home from "./component/Home";
-
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Easy from "./component/Easy";
+import Medim from "./component/Medim";
+import Hard from "./component/Hard";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-
-
-        <Router>
-        <Route path="/" component={Home} />
-        </Router>
-    
+      <Router>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/easy" component={Easy} />
+        <Route exact path="/medim" component={Medim} />
+        <Route exact path="/hard" component={Hard} />
+      </Router>
     </div>
   );
 }
