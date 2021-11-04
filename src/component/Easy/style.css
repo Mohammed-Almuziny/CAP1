@@ -1,0 +1,15 @@
+.playArea {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.card {
+  width: 10rem;
+  height: 10rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
