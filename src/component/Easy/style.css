@@ -18,6 +18,11 @@
   align-items: center;
 }
 
+.fliped {
+  
+  transform: rotatey(180deg);
+}
+
 .front,
 .back {
   width: 100%;

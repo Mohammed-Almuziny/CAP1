@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import imgA from "../../img/A.png";
 import imgK from "../../img/K.png";
@@ -11,72 +11,142 @@ import img7 from "../../img/7.png";
 import img6 from "../../img/6.png";
 import img5 from "../../img/5.png";
 import backImg from "../../img/back.png";
+
+const CountDown = ({ minutes = 0, seconds = 0 }) => {
+  const [over, setOver] = React.useState(false);
+  const [[m, s], setTime] = React.useState([minutes, seconds]);
+  const tick = () => {
+    if (m === 0 && s === 0) setOver(true);
+    else if (s == 0) {
+      setTime([m - 1, 59]);
+    } else {
+      setTime([m, s - 1]);
+    }
+  };
+  const reset = () => {
+    setTime([parseInt(minutes), parseInt(seconds)]);
+    setOver(false);
+  };
+  React.useEffect(() => {
+    const timerID = setInterval(() => tick(), 1000);
+    return () => clearInterval(timerID);
+  });
+  return (
+    <div>
+      <p>{`${m.toString().padStart(2, "0")}:${s
+        .toString()
+        .padStart(2, "0")}`}</p>
+      <div>{over ? "Time's up!" : ""}</div>
+    </div>
+  );
+};
 const Easy = () => {
-  let cards = [
-    {
-      id: 0,
-      image: <img src={imgA} />,
-    },
-    {
-      id: 1,
-      image: <img src={imgJ} />,
-    },
-    {
-      id: 2,
-      image: <img src={img10} />,
-    },
-    {
-      id: 3,
-      image: <img src={img8} />,
-    },
-    {
-      id: 4,
-      image: <img src={img7} />,
-    },
-    {
-      id: 5,
-      image: <img src={img6} />,
-    },
-  ];
+  const [moves, setmoves] = useState(0);
+  const [scoer, setscoer] = useState(0);
+  const [firstCard, setFirstCard] = useState(-1);
+  const [secondCard, setSecondCard] = useState(-1);
+  const [cards, setCards] = useState([]);
+  const [firstTarget, setFirstTarget] = useState();
+  const [secondTarget, setsecondTarget] = useState();
+  const random = () => {
+    let addedCard = [
+      {
+        id: 0,
+        image: <img src={imgA} />,
+      },
+      {
+        id: 1,
+        image: <img src={imgJ} />,
+      },
+      {
+        id: 2,
+        image: <img src={img10} />,
+      },
+      {
+        id: 3,
+        image: <img src={img8} />,
+      },
+      {
+        id: 4,
+        image: <img src={img7} />,
+      },
+      {
+        id: 5,
+        image: <img src={img6} />,
+      },
+    ];
+    setCards([...addedCard, ...addedCard].sort(() => Math.random() - 0.5));
+  };
+  useEffect(() => {
+    random();
+  }, []);
 
   let target = [];
-  let lastId;
 
-  const random = () => {
-    cards = [...cards, ...cards];
-    cards = cards.sort(() => Math.random() - 0.5);
-  };
+  const fliping = (e, index) => {
+    console.log(firstCard);
+    
+    if (firstCard === -1) {
+      console.log("case 1");
+      setFirstCard(index);
+      console.log(firstCard);
+    } else if(secondCard === -1) {
+      console.log("case 2");
+      setTimeout(() => {
+        setSecondCard(index);
+      }, 1000);
+      setSecondCard(index);
+      console.log(secondCard);
 
-  random();
+      setTimeout(() => {
+        console.log(secondCard);
+        // if (cards[1].image === cards[1].image) {
+        //   alert("mach");
 
-  const fliping = (e, id) => {
-    if (target[1] === undefined) {
-      if (target[0] === undefined) {
-        target.push(e.currentTarget);
-        target[0].style.transform = "rotateY(180deg)";
-        lastId = id;
-      } else {
-        target.push(e.currentTarget);
-        target[1].style.transform = "rotateY(180deg)";
+        //   setFirstCard(-1);
+        //   setSecondCard(-1);
 
-        setTimeout(() => {
-          if (lastId === id) {
-            
-            target[0].style.visibility = 'hidden';
-            target[1].style.visibility = 'hidden';
-            target = [];
-          } else {
-            target[0].style.transform = "rotateY(0deg)";
-            target[1].style.transform = "rotateY(0deg)";
-            target = [];
-          }
-        }, 2000);
-
-       
-      }
+        // } else {
+        //   setFirstCard(-1);
+        //   setSecondCard(-1);
+        // }
+        setFirstCard(-1);
+        setSecondCard(-1);
+      }, 2000);
     } else {
+      
     }
+    //   if (firstTarget) {
+    //     console.log("first");
 
+    //     setFirstTarget(e.currentTarget);
+
+    //     // firstTarget.style.transform = "rotateY(180deg)";
+
+    //   } else {
+    //     setmoves((moves) => moves + 1);
+    //     target.push(e.currentTarget);
+
+    //     console.log("new target", +target);
+    //     // target[1].style.transform = "rotateY(180deg)";
+
+    //     setTimeout(() => {
+    //       if (firstCard) {
+    //         console.log("id equ");
+    //         target[0].style.visibility = "hidden";
+    //         target[1].style.visibility = "hidden";
+    //         target = [];
+    //         setscoer((scoer) => scoer + 10);
+    //       } else {
+    //         console.log("id not equ");
+    //         target[0].style.transform = "rotateY(0deg)";
+    //         target[1].style.transform = "rotateY(0deg)";
+    //         target = [];
+    //       }
+    //     }, 2000);
+    //   }
+    // } else {
+    // }
     // if (firstTarget === undefined) {
     //   firstTarget = i;
     //   console.log();
@@ -87,13 +157,24 @@ const Easy = () => {
     //   target.style.transform = "rotateY(180deg)";
     // }
   };
+
+  const isFliped = (index) => {
+    if (index === firstCard) {
+      return true;
+    }
+    if (index === secondCard) {
+      return true;
+    }
+  };
   return (
     <div className="playArea">
       {cards.map((card, i) => (
         <div
-          className="card"
+          className={"card " + (isFliped(i) === true ? "fliped" : "")}
           key={i}
-          onClick={(event) => fliping(event, card.id)}
+          transform={isFliped(i) === true ? "rotateY(180deg)" : "rotateY(odeg)"}
+          // rotateY={}
+          onClick={(event) => fliping(event, i)}
         >
           <div className="  back">
             {" "}
@@ -102,6 +183,10 @@ const Easy = () => {
           <div className="  front"> {card.image} </div>
         </div>
       ))}
+      <p>Moves: {moves}</p>
+      <p>scoer: {scoer} </p>
+      {/* <p>{time}</p> */}
+      <CountDown minutes={1} seconds={5} />
     </div>
   );
 };
