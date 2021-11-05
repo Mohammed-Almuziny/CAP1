@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import "./style.css";
 import imgA from "../../img/A.png";
 import imgK from "../../img/K.png";
@@ -41,13 +42,14 @@ const CountDown = ({ minutes = 0, seconds = 0 }) => {
   );
 };
 const Easy = () => {
-  const [moves, setmoves] = useState(0);
+  const [moves, setMoves] = useState(0);
   const [scoer, setscoer] = useState(0);
   const [firstCard, setFirstCard] = useState(-1);
   const [secondCard, setSecondCard] = useState(-1);
   const [cards, setCards] = useState([]);
-  const [firstTarget, setFirstTarget] = useState();
-  const [secondTarget, setsecondTarget] = useState();
+  const [matchedCards, setMatchedCards] = useState([]);
+  const history = useHistory();
+
   const random = () => {
     let addedCard = [
       {
@@ -77,44 +79,64 @@ const Easy = () => {
     ];
     setCards([...addedCard, ...addedCard].sort(() => Math.random() - 0.5));
   };
+
   useEffect(() => {
     random();
   }, []);
 
-  let target = [];
-
-  const fliping = (e, index) => {
-    console.log(firstCard);
-    
+  useEffect(() => {
     if (firstCard === -1) {
-      console.log("case 1");
-      setFirstCard(index);
-      console.log(firstCard);
-    } else if(secondCard === -1) {
-      console.log("case 2");
+    } else {
+      setMoves(moves + 1);
+    }
+  }, [firstCard]);
+
+  useEffect(() => {
+    if (secondCard === -1) {
+    } else {
+      setMoves(moves + 1);
       setTimeout(() => {
-        setSecondCard(index);
-      }, 1000);
-      setSecondCard(index);
-      console.log(secondCard);
-
-      setTimeout(() => {
-        console.log(secondCard);
-        // if (cards[1].image === cards[1].image) {
-        //   alert("mach");
-
-        //   setFirstCard(-1);
-        //   setSecondCard(-1);
-
-        // } else {
-        //   setFirstCard(-1);
-        //   setSecondCard(-1);
-        // }
+        if (cards[firstCard].image === cards[secondCard].image) {
+          setMatchedCards([...matchedCards, firstCard, secondCard]);
+          setscoer((scoer) => scoer + 10);
+        }
         setFirstCard(-1);
         setSecondCard(-1);
       }, 2000);
+    }
+  }, [secondCard]);
+
+  useEffect(() => {
+    
+    if(matchedCards.length === 12){
+      alert("you win")
+      history.push("/")
+  }
+  }, [matchedCards]);
+
+  const fliping = (e, index) => {
+    if (firstCard === index) {
+    } else if (firstCard === -1) {
+      setFirstCard(index);
+    } else if (secondCard === -1) {
+      setSecondCard(index);
+
+      // setTimeout(() => {
+      //   console.log(secondCard);
+      //   // if (cards[1].image === cards[1].image) {
+      //   //   alert("mach");
+
+      //   //   setFirstCard(-1);
+      //   //   setSecondCard(-1);
+
+      //   // } else {
+      //   //   setFirstCard(-1);
+      //   //   setSecondCard(-1);
+      //   // }
+      //   setFirstCard(-1);
+      //   setSecondCard(-1);
+      // }, 2000);
     } else {
-      
     }
     //   if (firstTarget) {
     //     console.log("first");
@@ -166,11 +188,28 @@ const Easy = () => {
       return true;
     }
   };
+
+  const isMatched = (index) => {
+    let findCard = matchedCards.find((card) => {
+      if (index === card) return true;
+    });
+    
+    if (findCard !== undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="playArea">
       {cards.map((card, i) => (
         <div
-          className={"card " + (isFliped(i) === true ? "fliped" : "")}
+          className={
+            "card " +
+            (isFliped(i) ? "fliped" : "") +
+            (isMatched(i) ? "matched" : "")
+          }
           key={i}
           transform={isFliped(i) === true ? "rotateY(180deg)" : "rotateY(odeg)"}
           // rotateY={}
