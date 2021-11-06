@@ -13,7 +13,7 @@ import img8 from "../../img/8.png";
 import img7 from "../../img/7.png";
 import backImg from "../../img/back.png";
 
-const Medim = () => {
+const Medium = () => {
   const [moves, setMoves] = useState(0);
   const [scoer, setscoer] = useState(0);
   const [firstCard, setFirstCard] = useState(-1);
@@ -26,35 +26,35 @@ const Medim = () => {
     let addedCard = [
       {
         id: 0,
-        image: <img src={imgA}  alt=""/>,
+        image: <img src={imgA} alt="" />,
       },
       {
         id: 1,
-        image: <img src={imgJ} alt=""/>,
+        image: <img src={imgJ} alt="" />,
       },
       {
         id: 2,
-        image: <img src={imgQ} alt=""/>,
+        image: <img src={imgQ} alt="" />,
       },
       {
         id: 3,
-        image: <img src={imgK} alt=""/>,
+        image: <img src={imgK} alt="" />,
       },
       {
         id: 4,
-        image: <img src={img10} alt=""/>,
+        image: <img src={img10} alt="" />,
       },
       {
         id: 5,
-        image: <img src={img9} alt=""/>,
+        image: <img src={img9} alt="" />,
       },
       {
         id: 6,
-        image: <img src={img8} alt=""/>,
+        image: <img src={img8} alt="" />,
       },
       {
         id: 7,
-        image: <img src={img7} alt=""/>,
+        image: <img src={img7} alt="" />,
       },
     ];
     setCards([...addedCard, ...addedCard].sort(() => Math.random() - 0.5));
@@ -69,11 +69,13 @@ const Medim = () => {
     } else {
       setMoves(moves + 1);
     }
+    // eslint-disable-next-line
   }, [firstCard]);
 
   useEffect(() => {
     if (secondCard === -1) {
     } else {
+      // eslint-disable-next-line
       setMoves(moves + 1);
       setTimeout(() => {
         if (cards[firstCard].image === cards[secondCard].image) {
@@ -84,13 +86,14 @@ const Medim = () => {
         setSecondCard(-1);
       }, 2000);
     }
+    // eslint-disable-next-line
   }, [secondCard]);
 
   useEffect(() => {
     if (matchedCards.length === 16) {
-      history.push("/Win");
-
+      history.push(`/Win/${moves}/${scoer}`);
     }
+    // eslint-disable-next-line
   }, [matchedCards]);
 
   const fliping = (e, index) => {
@@ -113,6 +116,7 @@ const Medim = () => {
   };
 
   const isMatched = (index) => {
+    // eslint-disable-next-line
     let findCard = matchedCards.find((card) => {
       if (index === card) return true;
     });
@@ -139,7 +143,7 @@ const Medim = () => {
         >
           <div className="  back">
             {" "}
-            <img src={backImg}  alt=""/>{" "}
+            <img src={backImg} alt="" />{" "}
           </div>
           <div className="  front"> {card.image} </div>
         </div>
@@ -150,4 +154,4 @@ const Medim = () => {
     </div>
   );
 };
-export default Medim;
+export default Medium;

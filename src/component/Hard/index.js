@@ -28,43 +28,43 @@ const Hard = () => {
     let addedCard = [
       {
         id: 0,
-        image: <img src={imgA} alt=""/>,
+        image: <img src={imgA} alt="" />,
       },
       {
         id: 1,
-        image: <img src={imgJ} alt=""/>,
+        image: <img src={imgJ} alt="" />,
       },
       {
         id: 2,
-        image: <img src={imgQ} alt=""/>,
+        image: <img src={imgQ} alt="" />,
       },
       {
         id: 3,
-        image: <img src={imgK} alt=""/>,
+        image: <img src={imgK} alt="" />,
       },
       {
         id: 4,
-        image: <img src={img10} alt=""/>,
+        image: <img src={img10} alt="" />,
       },
       {
         id: 5,
-        image: <img src={img9} alt=""/>,
+        image: <img src={img9} alt="" />,
       },
       {
         id: 6,
-        image: <img src={img8} alt=""/>,
+        image: <img src={img8} alt="" />,
       },
       {
         id: 7,
-        image: <img src={img7} alt=""/>,
+        image: <img src={img7} alt="" />,
       },
       {
         id: 8,
-        image: <img src={img6} alt=""/>,
+        image: <img src={img6} alt="" />,
       },
       {
         id: 9,
-        image: <img src={img5} alt=""/>,
+        image: <img src={img5} alt="" />,
       },
     ];
     setCards([...addedCard, ...addedCard].sort(() => Math.random() - 0.5));
@@ -79,6 +79,7 @@ const Hard = () => {
     } else {
       setMoves(moves + 1);
     }
+    // eslint-disable-next-line
   }, [firstCard]);
 
   useEffect(() => {
@@ -94,12 +95,14 @@ const Hard = () => {
         setSecondCard(-1);
       }, 2000);
     }
+    // eslint-disable-next-line
   }, [secondCard]);
 
   useEffect(() => {
     if (matchedCards.length === 20) {
-      history.push("/Win");
+      history.push(`/Win/${moves}/${scoer}`);
     }
+    // eslint-disable-next-line
   }, [matchedCards]);
 
   const fliping = (e, index) => {
@@ -119,9 +122,11 @@ const Hard = () => {
     if (index === secondCard) {
       return true;
     }
+    // eslint-disable-next-line
   };
 
   const isMatched = (index) => {
+    // eslint-disable-next-line
     let findCard = matchedCards.find((card) => {
       if (index === card) return true;
     });
@@ -148,7 +153,7 @@ const Hard = () => {
         >
           <div className="  back">
             {" "}
-            <img src={backImg} alt=""/>{" "}
+            <img src={backImg} alt="" />{" "}
           </div>
           <div className="  front"> {card.image} </div>
         </div>

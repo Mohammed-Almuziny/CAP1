@@ -1,15 +1,15 @@
 import React from 'react'
-import moves from '../Easy'
-import setscoer from '../Easy'
+import { useParams } from 'react-router';
 export const Win = () => {
-
+    const {moves , scoer} = useParams();
     return (
+        
         <div className="win">
             
              <h2>Congratulations</h2>
              <div className="scoer">
           <p>You finshed the game in :{moves} moves </p>
-          <p>Your Scoer :{setscoer}</p>
+          <p>Your Scoer {scoer}</p>
           <button type='button' onClick={(e) => {
               e.preventDefault();
               window.location.href='/';

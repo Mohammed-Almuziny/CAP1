@@ -74,12 +74,14 @@ const Easy = () => {
         setSecondCard(-1);
       }, 2000);
     }
+    // eslint-disable-next-line
   }, [secondCard]);
 
   useEffect(() => {
     if (matchedCards.length === 12) {
-      history.push("/Win");
+      history.push(`/Win/${moves}/${scoer}`);
     }
+    // eslint-disable-next-line
   }, [matchedCards]);
 
   const fliping = (e, index) => {
@@ -101,7 +103,9 @@ const Easy = () => {
     }
   };
 
+  // eslint-disable-next-line
   const isMatched = (index) => {
+    // eslint-disable-next-line
     let findCard = matchedCards.find((card) => {
       if (index === card) return true;
     });

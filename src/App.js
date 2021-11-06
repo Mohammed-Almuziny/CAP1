@@ -1,6 +1,6 @@
 import Home from "./component/Home";
 import Easy from "./component/Easy";
-import Medim from "./component/Medim";
+import Medium from "./component/Medium";
 import Hard from "./component/Hard";
 import Win from "./component/Win";
 import Lose from "./component/Lose";
@@ -18,9 +18,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/easy" component={Easy} />
-        <Route exact path="/medim" component={Medim} />
+        <Route exact path="/medim" component={Medium} />
         <Route exact path="/hard" component={Hard} />
-        <Route exact path="/Win" component={Win} />
+        <Route exact path="/Win/:moves/:scoer" component={Win} />
         <Route exact path="/Lose" component={Lose} />
         <Route exact path="/Instructions" component={Instructions} />
 
