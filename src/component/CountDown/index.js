@@ -16,8 +16,10 @@ const CountDown = ({ minutes = 0, seconds = 0 }) => {
       setOver(true);
       alert("time out");
       history.push("/");
-    } else if (s == 0) {
+
+    } else if (s === 0) {
       setTime([m - 1, 59]);
+    
     } else {
       setTime([m, s - 1]);
     }
