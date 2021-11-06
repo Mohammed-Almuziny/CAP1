@@ -136,7 +136,7 @@ const Easy = () => {
       ))}
       <p>Moves: {moves}</p>
       <p>scoer: {scoer} </p>
-      <CountDown minutes={0} seconds={5} />
+      <CountDown minutes={0} seconds={45} />
     </div>
   );
 };
