@@ -17,6 +17,9 @@ const Home = () => {
         <Link to="/hard" className="link">
           hard
         </Link>
+        <Link to="/instructions" className="link">
+        instructions
+        </Link>
       </div>
     </div>
   );

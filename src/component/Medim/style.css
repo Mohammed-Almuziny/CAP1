@@ -8,8 +8,7 @@
 .card {
   width: 6rem;
   height: 6rem;
-  background-color: white;
-
+  border-radius: 7px;
   transition: transform 2s;
   transform-style: preserve-3d;
   cursor: pointer;

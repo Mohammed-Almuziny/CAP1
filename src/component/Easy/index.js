@@ -57,7 +57,7 @@ const Easy = () => {
   useEffect(() => {
     if (firstCard === -1) {
     } else {
-      setMoves(moves + 1);
+     
     }
   }, [firstCard]);
 
@@ -78,8 +78,7 @@ const Easy = () => {
 
   useEffect(() => {
     if (matchedCards.length === 12) {
-      alert("you win");
-      history.push("/");
+      history.push("/Win");
     }
   }, [matchedCards]);
 

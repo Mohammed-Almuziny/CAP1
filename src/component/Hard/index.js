@@ -98,8 +98,7 @@ const Hard = () => {
 
   useEffect(() => {
     if (matchedCards.length === 20) {
-      alert("you win");
-      history.push("/");
+      history.push("/Win");
     }
   }, [matchedCards]);
 

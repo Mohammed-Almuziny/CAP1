@@ -88,8 +88,8 @@ const Medim = () => {
 
   useEffect(() => {
     if (matchedCards.length === 16) {
-      alert("you win");
-      history.push("/");
+      history.push("/Win");
+
     }
   }, [matchedCards]);
 

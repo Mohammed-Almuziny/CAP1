@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import "./style.css"
 
 const CountDown = ({ minutes = 0, seconds = 0 }) => {
   const [over, setOver] = useState(false);
@@ -14,12 +15,9 @@ const CountDown = ({ minutes = 0, seconds = 0 }) => {
   const tick = () => {
     if (m === 0 && s === 0) {
       setOver(true);
-      alert("time out");
-      history.push("/");
-
+      history.push("/Lose");
     } else if (s === 0) {
       setTime([m - 1, 59]);
-    
     } else {
       setTime([m, s - 1]);
     }
@@ -31,7 +29,7 @@ const CountDown = ({ minutes = 0, seconds = 0 }) => {
   // };
 
   return (
-    <div>
+    <div className="time">
       <p>{`${m.toString().padStart(2, "0")}:${s
         .toString()
         .padStart(2, "0")}`}</p>
