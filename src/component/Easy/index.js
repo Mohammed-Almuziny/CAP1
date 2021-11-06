@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import CountDown from "../CountDown";
 import "./style.css";
 import imgA from "../../img/A.png";
 import imgK from "../../img/K.png";
@@ -13,34 +14,34 @@ import img6 from "../../img/6.png";
 import img5 from "../../img/5.png";
 import backImg from "../../img/back.png";
 
-const CountDown = ({ minutes = 0, seconds = 0 }) => {
-  const [over, setOver] = React.useState(false);
-  const [[m, s], setTime] = React.useState([minutes, seconds]);
-  const tick = () => {
-    if (m === 0 && s === 0) setOver(true);
-    else if (s == 0) {
-      setTime([m - 1, 59]);
-    } else {
-      setTime([m, s - 1]);
-    }
-  };
-  const reset = () => {
-    setTime([parseInt(minutes), parseInt(seconds)]);
-    setOver(false);
-  };
-  React.useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000);
-    return () => clearInterval(timerID);
-  });
-  return (
-    <div>
-      <p>{`${m.toString().padStart(2, "0")}:${s
-        .toString()
-        .padStart(2, "0")}`}</p>
-      <div>{over ? "Time's up!" : ""}</div>
-    </div>
-  );
-};
+// const CountDown2 = ({ minutes = 0, seconds = 0 }) => {
+//   const [over, setOver] = React.useState(false);
+//   const [[m, s], setTime] = React.useState([minutes, seconds]);
+//   const tick = () => {
+//     if (m === 0 && s === 0) setOver(true);
+//     else if (s == 0) {
+//       setTime([m - 1, 59]);
+//     } else {
+//       setTime([m, s - 1]);
+//     }
+//   };
+//   const reset = () => {
+//     setTime([parseInt(minutes), parseInt(seconds)]);
+//     setOver(false);
+//   };
+//   React.useEffect(() => {
+//     const timerID = setInterval(() => tick(), 1000);
+//     return () => clearInterval(timerID);
+//   });
+//   return (
+//     <div>
+//       <p>{`${m.toString().padStart(2, "0")}:${s
+//         .toString()
+//         .padStart(2, "0")}`}</p>
+//       <div>{over ? "Time's up!" : ""}</div>
+//     </div>
+//   );
+// };
 const Easy = () => {
   const [moves, setMoves] = useState(0);
   const [scoer, setscoer] = useState(0);
@@ -107,11 +108,10 @@ const Easy = () => {
   }, [secondCard]);
 
   useEffect(() => {
-    
-    if(matchedCards.length === 12){
-      alert("you win")
-      history.push("/")
-  }
+    if (matchedCards.length === 12) {
+      alert("you win");
+      history.push("/");
+    }
   }, [matchedCards]);
 
   const fliping = (e, index) => {
@@ -193,7 +193,7 @@ const Easy = () => {
     let findCard = matchedCards.find((card) => {
       if (index === card) return true;
     });
-    
+
     if (findCard !== undefined) {
       return true;
     } else {
@@ -225,7 +225,7 @@ const Easy = () => {
       <p>Moves: {moves}</p>
       <p>scoer: {scoer} </p>
       {/* <p>{time}</p> */}
-      <CountDown minutes={1} seconds={5} />
+      <CountDown minutes={0} seconds={5} />
     </div>
   );
 };
